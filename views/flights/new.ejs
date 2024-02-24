@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+
+<%const now = new Date();%>
+  
+<%const year = now.getFullYear() + 1;%>
+<%const currentYear = now.getFullYear();%>
+<%const month = String(now.getMonth()+1).padStart(2, '0'); %>
+<%const day = String(now.getDate()).padStart(2, '0');%>
+<%const hours = String(now.getHours()).padStart(2, '0');%>
+<%const minutes = String(now.getMinutes()).padStart(2, '0');%>
+<%const maxDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;%>
+<%const minDateTime = `${currentYear}-${month}-${day}T${hours}:${minutes}`;%>
+
+
+<form action="/flights" method="POST">
+   <label> airline
+   <select name="airline">
+    <option value="American">American</option>
+    <option value="Southwest">Southwest</option>
+    <option value="United">United</option>
+    </select>
+   </label><br>
+   <label> airport
+   <select name="airport">
+    <option value="AUS">AUS</option>
+    <option value="DFW">DFW</option>
+    <option value="DEN" selected>DEN</option>
+    <option value="LAX">LAX</option>
+    <option value="SAN">SAN</option>
+    </select>
+   </label><br>
+   <label> flightNo
+   <input type="number" max=9999 min=10 name="flightNo">
+   </label><br>
+   <label> departs
+   <input type="datetime-local" min="<%= minDateTime %>" max="<%= maxDateTime %>" name="departs">
+   </label><br>
+   <button type="submit">Add Flight</button>
+</form>
+<p><%= errMessage %></p>
+
+<%- include('../partials/footer') %>
