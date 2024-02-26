@@ -1,0 +1,67 @@
+<%- include('../partials/header') %>
+
+<div>Airline:</div>
+<div><%= flight.airline %></div>
+<br>
+<div>Airport:</div>
+<div><%= flight.airport %></div>
+<br>
+<div>Flight No:</div>
+<div><%= flight.flightNo %></div>
+<br>
+<div>Depart:</div>
+<div><%= flight.departs.toLocaleString() %></div>
+
+<hr>
+
+
+
+<% const minYear = flight.departs.getFullYear() %>
+<% const minMonth = String(flight.departs.getMonth() + 1).padStart(2,0) %>
+<% const minDate = String(flight.departs.getDate()).padStart(2,0) %>
+<% const minHours = String(flight.departs.getHours()).padStart(2,0) %>
+<% const minMinutes = String(flight.departs.getMinutes()).padStart(2,0) %>
+<% const minDateTime = `${minYear}-${minMonth}-${minDate}T${minHours}:${minMinutes}`%>
+<% console.log(minDateTime) %>
+
+
+<form action="/flights/<%= flight._id %>/destinations" method="POST">
+   <label>Airport</label>
+      <select name="airport">
+         <option value="AUS">AUS</option>
+         <option value="DFW">DFW</option>
+         <option value="DEN">DEN</option>
+         <option value="LAX">LAX</option>
+         <option value="SAN">SAN</option>
+      </select>
+   
+   <label>Depart</label>
+
+    <input type="datetime-local" min= "<%= minDateTime %>" name="depart">
+
+   
+
+   <input type="submit" value="Add Details">
+</form>
+
+<hr>
+<% if(flight.destinations.length){ %>
+<h3>Details</h3>
+   <table>
+    <thead>
+       <th>Airport</th>
+       <th>Depart</th>
+    </thead>
+    <tbody>
+     <% flight.destinations.forEach((d)=>{ %>
+        <tr>
+           <td><%= d.airport %></td>
+           <td><%= d.depart.toLocaleString() %></td>
+        </tr>
+     <% }) %>
+    </tbody>
+    </table>
+    <% } else { %>
+        <h5>No Details Yet</h5>
+<% } %>
+<%- include('../partials/footer') %>

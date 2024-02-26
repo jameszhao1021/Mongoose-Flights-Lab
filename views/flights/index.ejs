@@ -6,15 +6,17 @@
         <th>Airport</th>
         <th>Flight No</th>
         <th>Departs</th>
+        <th></th>
       </tr>
 </thead>
    <tbody>
-   <% flights.forEach((f)=>{ %>
+   <% flight.forEach((f)=>{ %>
     <tr>
         <td><%= f.airline %></td>
         <td><%= f.airport %></td>
         <td><%= f.flightNo %></td>
         <td><%= f.departs.toLocaleString() %></td>
+        <td> <a href="/flights/<%= f._id %>">Details</a></td>
       </tr>
     <%  })%>
    </tbody>
