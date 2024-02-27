@@ -4,15 +4,7 @@ const mongoose = require('mongoose')
 // create a shortcut
 const Schema = mongoose.Schema;
 
-//define a schema
-// const flightSchema = new Schema({
-//     airline: String,
-//     airport: String,
-//     flightNo: Number,
-//     departs: Date,
-// }, {
-//     timestamps: true
-// })
+
 
 const destinationSchema = new Schema({
     airport: {
@@ -20,6 +12,8 @@ const destinationSchema = new Schema({
         enum:['AUS','DFW', 'DEN', 'LAX', 'SAN']
     },
     depart: {type: Date},
+},{
+    timestamps: true
 })
 
 const flightSchema = new Schema({

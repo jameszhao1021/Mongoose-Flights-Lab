@@ -61,7 +61,36 @@
      <% }) %>
     </tbody>
     </table>
+    <hr>
+   
+
     <% } else { %>
         <h5>No Details Yet</h5>
 <% } %>
+<h3>All Tickets</h3>
+<% if (tickets.length) { %>
+   <table>
+       <thead>
+         <tr>
+           <th>Seat</th>
+           <th>Price</th>
+         </tr>
+       </thead>
+       <tbody>
+         <% tickets.forEach(function(t) { %>
+           <tr>
+             <td><%= t.seat %></td>
+             <td><%= t.price %></td>
+           </tr>
+         <% }); %>
+       </tbody>
+     </table>
+     <% } else { %>
+       <h5>No Tickets Yet</h5>  
+     <% } %>
+<a href="/flights/<%= flight._id %>/tickets/new"><input type="submit" value="New Ticket"></a>
+
+   <% console.log(tickets) %>
+
+
 <%- include('../partials/footer') %>
